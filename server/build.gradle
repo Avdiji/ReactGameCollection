@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '3.1.0' // Add Spring Boot plugin
+    id 'io.spring.dependency-management' version '1.1.0' // For dependency management
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    implementation 'org.springframework.boot:spring-boot-starter' // Basic Spring Boot starter dependency
+    implementation 'org.springframework.boot:spring-boot-starter-websocket' // Add WebSocket support if needed
+}
+
+application {
+    mainClass = 'com.gameWebsockets.Main'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.gameWebsockets.Main'
+        )
+    }
+}
