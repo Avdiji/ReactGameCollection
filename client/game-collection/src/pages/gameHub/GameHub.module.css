@@ -1,0 +1,46 @@
+.gameHub {
+    text-align: center;
+}
+
+.gameHub h1 {
+    background-color: #480d4d;
+    color: white;
+    font-size: 50px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.gameHub_cards {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+
+@media only screen and (max-width: 780px) {
+    .gameHub_cards {
+        justify-content: center;
+    
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    
+        flex-wrap: wrap;
+    }
+}
+
+
+@media only screen and (max-width: 440px) {
+    .gameHub_cards {
+        gap: 20px;
+    
+    }
+
+    .gameHub h1 {
+        font-size: 25px;
+    }
+
+}
