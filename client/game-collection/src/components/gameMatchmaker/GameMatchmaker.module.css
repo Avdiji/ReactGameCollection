@@ -1,0 +1,47 @@
+.gameMatchmaker {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.gameMatchmaker input {
+    width: 75%;
+    height: 50;
+    text-align: center;
+
+    padding: 5px;
+    font-size: x-large;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+.joinSelectionContainer {
+    display: flex;
+    justify-content: row;
+    gap: 10vw;
+}
+
+
+@media only screen and (max-width: 780px) {
+    .gameMatchmaker input {
+        height: 25px;
+        font-size: large;
+    }
+
+}
+
+
+@media only screen and (max-width: 440px) {
+    @media only screen and (max-width: 780px) {
+        .gameMatchmaker input {
+            height: 15px;
+            font-size: small;
+        }
+    
+    }
+}

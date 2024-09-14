@@ -16,3 +16,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --card-color: rgba(233, 233, 168, 0.75);
+
+  --header-background: #480d4d;
+  --header-text-color: white;
+}

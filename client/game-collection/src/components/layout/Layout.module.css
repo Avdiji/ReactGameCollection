@@ -1,6 +1,9 @@
 .layout {
     margin: 10vw;
     margin-top: 2.5vh;
+
+    display: flex;
+    justify-content: center;
 }
 
 

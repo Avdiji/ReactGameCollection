@@ -1,15 +1,26 @@
-import classes from "./GameHub.module.css"
+import classes from "./GameHub.module.css";
+import { useNavigate } from "react-router-dom";
 
-import Card from "./Card";
-import hangmanImage from "../../assets/images/hangman.png"
+import hangmanImage from "../../assets/images/hangman.png";
 
+import Header from "../../components/header/Header";
+import Card from "../../components/card/Card";
+
+/**
+ * GameHub component, allows to select a game out of the collection.
+ * 
+ * @returns {JSX.Element} The GameHub.
+ */
 export default function GameHub() {
-    return (
-        <div className={classes.gameHub}>
-            <h1>Fitor's Game Collection</h1>
-        <div className={classes.gameHub_cards}>
-            <Card svgPath={hangmanImage} title="Hangman" />
-        </div>
-        </div>
-    );
+
+  const nav = useNavigate();
+
+  return (
+    <div className={classes.gameHub}>
+      <Header title="Fitor's Game Collection" />
+      <div className={classes.gameHub_cards}>
+        <Card imgSrc={hangmanImage} title="Hangman" onClick={() => nav("/hangman")} />
+      </div>
+    </div>
+  );
 }

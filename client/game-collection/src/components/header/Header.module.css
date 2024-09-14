@@ -1,0 +1,23 @@
+.header {
+    background-color: #480d4d;
+    color: white;
+    font-size: 50px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    padding-left: 25vw;
+    padding-right: 25vw;
+}
+
+@media only screen and (max-width: 780px) {
+    .header {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .header {
+        font-size: medium;
+    }
+}
