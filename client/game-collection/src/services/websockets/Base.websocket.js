@@ -13,7 +13,7 @@ export class BaseWebsocketHandler {
      * @param {function} onCloseCallback The callback function to be executed when the WebSocket is closed.
      * @param {function} onErrorCallback The callback function to be executed when an error occurs.
      */
-    constructor(websocketUrl, onMessageCallback) {
+    constructor(onMessageCallback, websocketUrl) {
         this.websocketUrl = websocketUrl;
         this.websocket = new WebSocket(websocketUrl);
         this.isWebSocketOpen = false;

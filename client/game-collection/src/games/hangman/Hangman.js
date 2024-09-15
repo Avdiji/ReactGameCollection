@@ -1,24 +1,41 @@
-import { useState, useEffect, useRef } from "react";
 import GameMatchmaker from "../../components/gameMatchmaker/GameMatchmaker";
 import classes from "./Hangman.module.css"
 
 import { HangmanWebsocketHandler } from "../../services/websockets/Hangman.websocket";
+import { useGameSession } from "../useGameSession";
 
-// TODO cleanup
 export default function Hangman() {
-    let [sessionName, setSessionName] = useState(null);
-    const hangmanWSHandler = useRef(null);
+    const messageCallback = function(message) {
+        console.log(message);
+    }
 
-    useEffect(() => {
-        hangmanWSHandler.current = new HangmanWebsocketHandler();
-        return () => {
-            hangmanWSHandler.current.closeConnection();
-        };
-    }, []); 
+    const hangmanWSHandler = new HangmanWebsocketHandler(messageCallback);
+
+    const {
+        isNameSelectionState,
+        isMatchmakingState,
+        
+        setSessionName,
+        setPlayerName,
+        onCreate,
+        onJoin
+    } = useGameSession(hangmanWSHandler)
 
     return (
+
         <div>
-            <GameMatchmaker title="Hangman"/>
+            {isNameSelectionState &&
+                <GameMatchmaker
+                    title="Hangman"
+                    setSessionName={setSessionName}
+                    setPlayerName={setPlayerName}
+                    onCreate={onCreate}
+                    onJoin={onJoin} />
+            }
+
+            {isMatchmakingState &&
+                <div>FITORR</div>
+            }
         </div>
     );
 }

@@ -1,6 +1,10 @@
 {
-    "DIVIDER": "$",
+    "DIVIDER": ";",
     "DISCONNECT": "disconnect",
+
     "CREATE": "create",
-    "JOIN": "join"
+    "CREATED": "created",
+
+    "JOIN": "join",
+    "JOINED": "joined"
 }

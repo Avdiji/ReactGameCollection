@@ -6,9 +6,9 @@ import { BaseWebsocketHandler } from "./Base.websocket";
  */
 export class HangmanWebsocketHandler extends BaseWebsocketHandler {
     constructor(
+        onMessageCallback,
         websocketUrl = 'ws://localhost:8080/springGame/hangman',
-        onMessageCallback = (message) => { console.log(message); },
     ) {
-        super(websocketUrl, onMessageCallback);
+        super(onMessageCallback, websocketUrl);
     }
 }

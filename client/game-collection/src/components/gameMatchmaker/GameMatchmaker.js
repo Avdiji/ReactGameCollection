@@ -19,11 +19,12 @@ export default function GameMatchmaker(props) {
             <div className={classes.gameMatchmaker}>
                 <Header title={props.title} />
 
-                <input placeholder="Roomname" />
+                <input placeholder="Roomname" onChange={(e) => props.setSessionName(e.target.value)} />
+                <input placeholder="Player Name" onChange={(e) => props.setPlayerName(e.target.value)} />
 
                 <div className={classes.joinSelectionContainer}>
-                    <Card title="CREATE SESSION" imgSrc={createImage} />
-                    <Card title="JOIN" imgSrc={joinImage} />
+                    <Card title="CREATE SESSION" imgSrc={createImage} onClick={props.onCreate}/>
+                    <Card title="JOIN" imgSrc={joinImage} onClick={props.onJoin}/>
                 </div>
 
             </div>
