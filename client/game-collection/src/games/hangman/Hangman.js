@@ -4,17 +4,18 @@ import classes from "./Hangman.module.css"
 import { HangmanWebsocketHandler } from "../../services/websockets/Hangman.websocket";
 import { useGameSession } from "../useGameSession";
 
+/**
+ * @returns Hangman Game...
+ */
 export default function Hangman() {
-    const messageCallback = function(message) {
-        console.log(message);
-    }
-
-    const hangmanWSHandler = new HangmanWebsocketHandler(messageCallback);
+    // The Hangman websocketHandler with all callbacks.
+    const hangmanWSHandler = new HangmanWebsocketHandler((message) => {
+        console.log(message)
+    });
 
     const {
-        isNameSelectionState,
-        isMatchmakingState,
-        
+        sessionName,
+        playerName,
         setSessionName,
         setPlayerName,
         onCreate,
@@ -22,20 +23,13 @@ export default function Hangman() {
     } = useGameSession(hangmanWSHandler)
 
     return (
-
         <div>
-            {isNameSelectionState &&
-                <GameMatchmaker
-                    title="Hangman"
-                    setSessionName={setSessionName}
-                    setPlayerName={setPlayerName}
-                    onCreate={onCreate}
-                    onJoin={onJoin} />
-            }
-
-            {isMatchmakingState &&
-                <div>FITORR</div>
-            }
+            <GameMatchmaker
+                title="Hangman"
+                setSessionName={setSessionName}
+                setPlayerName={setPlayerName}
+                onCreate={onCreate}
+                onJoin={onJoin} />
         </div>
     );
 }

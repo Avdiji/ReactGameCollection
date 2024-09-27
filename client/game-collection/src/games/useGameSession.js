@@ -1,53 +1,63 @@
 import { useState, useEffect, useRef } from "react";
 import { getConstantValue } from "../services/other/ConstantsUtils";
+import { BaseWebsocketHandler } from "../services/websockets/Base.websocket";
 
+/**
+ * Function checks whether one of the passed values is invalid (null or empty).
+ * @param  {...string} values The values to be checked.
+ * @returns True if one of the values is equal to null or empty.
+ */
 function areStringsNullOrEmpty(...values) {
     return values.some(value => !value || value.length === 0);
 }
 
-async function createMessage(key, ...values) {
+/**
+ * 
+ * @param {string} commandStr The command to be executed (create, join, move)...
+ * @param  {...string} values 
+ * @returns 
+ */
+async function createMessage(commandStr, ...values) {
     const dividerValue = await getConstantValue("DIVIDER");
-    const command = await getConstantValue(key);
+    const command = await getConstantValue(commandStr);
 
     return command + dividerValue + values.join(dividerValue);
 }
 
+/**
+ * 
+ * @param {BaseWebsocketHandler} websocketHandlerInstance WebsocketHandler for this hook.
+ * @returns A Hook, which helps during the initial room creation phase.
+ */
 export function useGameSession(websocketHandlerInstance) {
-    const [isNameSelectionState, setNameSelectionState] = useState(true);
-    const [isMatchmakingState, setMatchmakingState] = useState(false);
-
-    const [sessionName, setSessionName] = useState(null);
-    const [playerName, setPlayerName] = useState(null);
-
+    // Autoclose the underlying websocketHandler.
     const wsHandler = useRef(websocketHandlerInstance);
-
-    const onCreate = async function () {
-        if (areStringsNullOrEmpty(sessionName, playerName)) {
-            console.log("Invalid")
-            return;
-        }
-        websocketHandlerInstance.sendMessage(await createMessage("CREATE", sessionName, playerName));
-    };
-
-    const onJoin = async function () {
-        if (areStringsNullOrEmpty(sessionName, playerName)) {
-            console.log("invalid");
-            return;
-        }
-        websocketHandlerInstance.sendMessage(await createMessage("JOIN", sessionName, playerName));
-    };
-
-    
     useEffect(() => {
-        return () => {
+        return(() => {
             wsHandler.current.closeConnection();
-        };
+        });
     }, [wsHandler]);
 
+    const [sessionName, setSessionName] = useState(null); // sessionName getter/setter
+    const [playerName, setPlayerName] = useState(null); // platerName getter/setter
+
+    // function to be executed when client presses the create session button
+    const onCreate = async function () {
+        if (!areStringsNullOrEmpty(sessionName, playerName)) {
+            websocketHandlerInstance.sendMessage(await createMessage("CREATE", sessionName, playerName));
+        }
+    };
+
+    // function to be executed when client presses the join button
+    const onJoin = async function () {
+        if (!areStringsNullOrEmpty(sessionName, playerName)) {
+            websocketHandlerInstance.sendMessage(await createMessage("JOIN", sessionName, playerName));
+        }
+    };
+
     return {
-        isNameSelectionState,
-        isMatchmakingState,
-        
+        sessionName,
+        playerName,
         setSessionName,
         setPlayerName,
         onCreate,

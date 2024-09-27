@@ -21,7 +21,7 @@ public class HangmanHandler extends BaseHandler {
     protected void handleTextMessage(@NotNull WebSocketSession session, TextMessage message) throws Exception {
         String actualMessage = message.getPayload();
         String[] splitMessage = actualMessage.split(MessageUtils.DIVIDER);
-
+        System.out.println(actualMessage);
         handleCreate(session, splitMessage);
         handleJoin(session, splitMessage);
     }
@@ -33,25 +33,19 @@ public class HangmanHandler extends BaseHandler {
         }
 
         final String sessionName = splitMessage[1];
-        Optional<BaseGame> foundGame = Optional.ofNullable(GameUtils.getGame(hangmanSessions, sessionName));
+        BaseGame game = GameUtils.getGame(hangmanSessions, sessionName);
+        if(game == null) {
+            Hangman hangmanSession = new Hangman(sessionName);
+            BaseGame.Player player = new BaseGame.Player(session, splitMessage[2]);
+            hangmanSession.addPlayer(player);
+            hangmanSessions.add(hangmanSession);
 
-        foundGame.ifPresentOrElse(
-                (game) -> {
-                    System.out.println("Game already exists");
-                },
-                () -> {
-                    Hangman hangmanSession = new Hangman(sessionName);
-                    BaseGame.Player player = new BaseGame.Player(session, splitMessage[2]);
-                    hangmanSession.addPlayer(player);
-                    hangmanSessions.add(hangmanSession);
-
-                    try {
-                        session.sendMessage(new TextMessage(MessageUtils.CREATED));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+            try {
+                session.sendMessage(new TextMessage(MessageUtils.CREATED));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @Override
@@ -62,20 +56,14 @@ public class HangmanHandler extends BaseHandler {
 
         final String sessionName = splitMessage[1];
         Optional<BaseGame> foundGame = Optional.ofNullable(GameUtils.getGame(hangmanSessions, sessionName));
-
-        foundGame.ifPresentOrElse(
-                (game) -> {
-                    BaseGame.Player player = new BaseGame.Player(session, splitMessage[2]);
-                    game.addPlayer(player);
-                    try {
-                        session.sendMessage(new TextMessage(MessageUtils.JOINED));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                },
-                () -> {
-                    System.out.println("Game doesnt exist");
-                }
-        );
+        foundGame.ifPresent((game) -> {
+            BaseGame.Player player = new BaseGame.Player(session, splitMessage[2]);
+            game.addPlayer(player);
+            try {
+                session.sendMessage(new TextMessage(MessageUtils.JOINED));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
