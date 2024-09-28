@@ -1,10 +1,10 @@
 {
-    "DIVIDER": ";",
+    "DIVIDER": "$",
     "DISCONNECT": "disconnect",
 
-    "CREATE": "create",
-    "CREATED": "created",
+    "CREATE_SESSION": "create_session",
+    "CREATED_SESSION": "created_session",
 
-    "JOIN": "join",
-    "JOINED": "joined"
+    "JOIN_SESSION": "join_session",
+    "JOINED_SESSION": "joined_session"
 }

@@ -33,25 +33,28 @@ export function useGameSession(websocketHandlerInstance) {
     // Autoclose the underlying websocketHandler.
     const wsHandler = useRef(websocketHandlerInstance);
     useEffect(() => {
-        return(() => {
+        return (() => {
             wsHandler.current.closeConnection();
         });
     }, [wsHandler]);
 
+    // states...
     const [sessionName, setSessionName] = useState(null); // sessionName getter/setter
     const [playerName, setPlayerName] = useState(null); // platerName getter/setter
 
     // function to be executed when client presses the create session button
     const onCreate = async function () {
         if (!areStringsNullOrEmpty(sessionName, playerName)) {
-            websocketHandlerInstance.sendMessage(await createMessage("CREATE", sessionName, playerName));
+            const message = await createMessage("CREATE_SESSION", sessionName, playerName);
+            console.log(message);
+            websocketHandlerInstance.sendMessage(message);
         }
     };
 
     // function to be executed when client presses the join button
     const onJoin = async function () {
         if (!areStringsNullOrEmpty(sessionName, playerName)) {
-            websocketHandlerInstance.sendMessage(await createMessage("JOIN", sessionName, playerName));
+            websocketHandlerInstance.sendMessage(await createMessage("JOIN_SESSION", sessionName, playerName));
         }
     };
 

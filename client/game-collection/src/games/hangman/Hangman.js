@@ -1,8 +1,8 @@
-import GameMatchmaker from "../../components/gameMatchmaker/GameMatchmaker";
 import classes from "./Hangman.module.css"
 
 import { HangmanWebsocketHandler } from "../../services/websockets/Hangman.websocket";
 import { useGameSession } from "../useGameSession";
+import CreateOrJoinGame from "../../components/gameMatchmaker/CreateOrJoinGame";
 
 /**
  * @returns Hangman Game...
@@ -10,6 +10,7 @@ import { useGameSession } from "../useGameSession";
 export default function Hangman() {
     // The Hangman websocketHandler with all callbacks.
     const hangmanWSHandler = new HangmanWebsocketHandler((message) => {
+        // setIsInMatchmaking when created/joined...
         console.log(message)
     });
 
@@ -19,12 +20,12 @@ export default function Hangman() {
         setSessionName,
         setPlayerName,
         onCreate,
-        onJoin
+        onJoin,
     } = useGameSession(hangmanWSHandler)
 
     return (
         <div>
-            <GameMatchmaker
+            <CreateOrJoinGame
                 title="Hangman"
                 setSessionName={setSessionName}
                 setPlayerName={setPlayerName}

@@ -4,6 +4,7 @@ import { getConstantValue } from "../other/ConstantsUtils";
  * Base websocket handler, acts as a foundation for all other websocket handlers.
  */
 export class BaseWebsocketHandler {
+
     /**
      * Constructor creates a new WebSocket and sets up event handlers.
      *
@@ -68,4 +69,6 @@ export class BaseWebsocketHandler {
             console.error("WebSocket is not open. Cannot close.");
         }
     }
+
+    
 }

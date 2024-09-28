@@ -2,14 +2,21 @@ package gameCollection.games;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Hangman game.
+ */
 public class Hangman extends BaseGame {
+    public Hangman() {
+        super();
+    }
 
-    /**
-     * Constructor
-     *
-     * @param roomName Name of this game session.
-     */
-    public Hangman(@NotNull String roomName) {
-        super(roomName);
+    @Override
+    public int getMinPlayerCount() {
+        return 1;
+    }
+
+    @Override
+    public int getMaxPlayerCount() {
+        return 99;
     }
 }

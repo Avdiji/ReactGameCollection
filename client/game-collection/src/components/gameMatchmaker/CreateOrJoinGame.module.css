@@ -1,4 +1,4 @@
-.gameMatchmaker {
+.createOrJoinGame {
     display: flex;
     flex-direction: column;
 
@@ -8,7 +8,7 @@
     gap: 25px;
 }
 
-.gameMatchmaker input {
+.createOrJoinGame input {
     width: 75%;
     height: 50;
     text-align: center;
@@ -28,7 +28,7 @@
 
 
 @media only screen and (max-width: 780px) {
-    .gameMatchmaker input {
+    createOrJoinGame input {
         height: 25px;
         font-size: large;
     }
@@ -38,7 +38,7 @@
 
 @media only screen and (max-width: 440px) {
     @media only screen and (max-width: 780px) {
-        .gameMatchmaker input {
+        createOrJoinGame input {
             height: 15px;
             font-size: small;
         }
