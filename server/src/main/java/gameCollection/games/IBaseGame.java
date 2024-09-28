@@ -25,8 +25,9 @@ public interface IBaseGame {
      * Method adds a player to the session. If the player has already joined the session nothing happens.
      *
      * @param player Player to be added to the session.
+     * @return True if the player was added, else false.
      */
-    void addPlayer(@NotNull final Player player);
+    boolean addPlayer(@NotNull final Player player);
 
     /**
      * Method broadcasts a message to all players in the session.

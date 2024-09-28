@@ -1,5 +1,5 @@
 {
-    "DIVIDER": "$",
+    "DIVIDER": "#--#",
     "DISCONNECT": "disconnect",
 
     "CREATE_SESSION": "create_session",

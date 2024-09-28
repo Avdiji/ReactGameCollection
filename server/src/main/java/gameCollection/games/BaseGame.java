@@ -26,8 +26,8 @@ public abstract class BaseGame implements IBaseGame {
     }
 
     @Override
-    public void addPlayer(@NotNull Player player) {
-        players.add(player);
+    public boolean addPlayer(@NotNull Player player) {
+        return players.add(player);
     }
 
     @Override

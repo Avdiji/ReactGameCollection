@@ -2,6 +2,7 @@ package gameCollection.websockets;
 
 import gameCollection.utils.MessageUtils;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.Arrays;

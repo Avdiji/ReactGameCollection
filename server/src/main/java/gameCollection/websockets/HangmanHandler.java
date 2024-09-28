@@ -15,10 +15,8 @@ public class HangmanHandler extends BaseHandler<Hangman> {
     }
 
     @Override
-    protected void handleTextMessage(@NotNull WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(@NotNull final WebSocketSession session, @NotNull final TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
-
-        System.out.println(message.getPayload());
     }
 
 }

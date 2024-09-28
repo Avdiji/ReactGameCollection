@@ -46,7 +46,6 @@ export function useGameSession(websocketHandlerInstance) {
     const onCreate = async function () {
         if (!areStringsNullOrEmpty(sessionName, playerName)) {
             const message = await createMessage("CREATE_SESSION", sessionName, playerName);
-            console.log(message);
             websocketHandlerInstance.sendMessage(message);
         }
     };
