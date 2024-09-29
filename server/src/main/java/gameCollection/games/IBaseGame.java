@@ -23,6 +23,7 @@ public interface IBaseGame {
 
     /**
      * Method adds a player to the session. If the player has already joined the session nothing happens.
+     * Also, the method does not allow the game to exceed its maximumPlayerCount...
      *
      * @param player Player to be added to the session.
      * @return True if the player was added, else false.

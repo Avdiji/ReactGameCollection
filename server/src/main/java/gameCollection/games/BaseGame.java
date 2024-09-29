@@ -27,7 +27,10 @@ public abstract class BaseGame implements IBaseGame {
 
     @Override
     public boolean addPlayer(@NotNull Player player) {
-        return players.add(player);
+        if (players.size() < getMaxPlayerCount()) {
+            return players.add(player);
+        }
+        return false;
     }
 
     @Override

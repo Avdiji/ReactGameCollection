@@ -67,7 +67,6 @@ public abstract class BaseHandler<T extends IBaseGame> extends TextWebSocketHand
         String sessionName = parsedMessage.getSessionName();
         T foundGame = gameSessions.get(sessionName);
 
-        // No further checking, as the frontend makes it impossible to create/join more than once...
         if (foundGame == null) {
             T game = createInstance();
             boolean success = game.addPlayer(new IBaseGame.Player(session, parsedMessage.getClientName()));
@@ -82,8 +81,6 @@ public abstract class BaseHandler<T extends IBaseGame> extends TextWebSocketHand
     public void handleJoinSession(@NotNull WebSocketSession session, @NotNull ParsedIncomingMessage parsedMessage) {
         String sessionName = parsedMessage.getSessionName();
         Optional<T> foundGame = Optional.ofNullable(gameSessions.get(sessionName));
-
-        // No further checking, as the frontend makes it impossible to create/join more than once...
         foundGame.ifPresent(game -> {
             IBaseGame.Player player = new IBaseGame.Player(session, parsedMessage.getClientName());
             boolean success = game.addPlayer(player);
